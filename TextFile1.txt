@@ -1,0 +1,41 @@
+//public ActionResult AddExtraShift(int id)
+        //{
+        //    var emps = _empRep.GetActives().Select(x => new EmployeeVM
+        //    {
+        //        EmployeeID = x.ID,
+        //        FirstName = x.FirstName,
+        //        LastName = x.LastName,
+        //        WagePerHour = x.WagePerHour
+
+        //    }).FirstOrDefault(x => x.EmployeeID == id);
+
+        //    ExtraShiftVM extraShiftVM = new ExtraShiftVM();
+
+        //    var model = new ExtraShiftAddUpdateVM()
+        //    {
+        //        Employee = emps,
+        //        ExtraShift = extraShiftVM
+
+        //    };
+
+        //    return View(model);
+        //}
+
+        //[HttpPost]
+        //public ActionResult AddExtraShift(ExtraShiftVM extraShiftVM, DateTime extraShiftDate)
+        //{
+        //    decimal total = extraShiftVM.HowManyHours * extraShiftVM.Percent * extraShiftVM.ShiftWagePerHour;
+
+        //    ExtraShift extraShift = new ExtraShift()
+        //    {
+        //        EmployeeID = extraShiftVM.EmployeeID,
+        //        ExtraShiftDate = extraShiftDate.Date,
+        //        HowManyHours = extraShiftVM.HowManyHours,
+        //        ShiftWagePerHour = extraShiftVM.ShiftWagePerHour,
+        //        TotalWage = total
+        //    };
+
+        //    _extraShiftRep.Add(extraShift);
+
+        //    return RedirectToAction("ListExtraShifts");
+        //}

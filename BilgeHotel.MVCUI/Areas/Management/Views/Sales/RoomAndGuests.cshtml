@@ -1,0 +1,41 @@
+﻿@model BilgeHotel.MVCUI.Areas.Management.Data.ViewModels.ReservationVMs.RoomAndGuestsListPageVM
+@{
+    ViewBag.Title = "RoomAndGuests";
+    Layout = "~/Areas/Management/Views/Shared/_LayoutArea.cshtml";
+}
+
+<h2>Odada Kalan Misafirler</h2>
+
+<table class="table table-borderless">
+    <thead>
+        <tr>
+            <th scope="col">Oda Numarası</th>
+            <th scope="col">İsim Soyisim</th>
+            <th scope="col">TC Kimlik Numarası</th>         
+            <th scope="col">Rezervasyonu Kim Yaptı</th>         
+            <th scope="col">Giriş Tarihi</th>         
+            <th scope="col">Çıkış Tarihi</th>         
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reservation in Model.RoomAndReservationVMs)
+        {
+            <tr>
+                <td>@reservation.RoomID</td>
+                @foreach (var item in Model.GuestVMs)
+                {
+                    if (item.ID == reservation.GuestID)
+                    {
+                        <td>@item.FirstName @item.LastName</td>
+                        <td>@item.IdentificationNumber</td>
+                    }
+                }
+                <td>@Model.UserVM.FirstName @Model.UserVM.LastName</td>
+                <td>@Model.ReservationsVM.CheckInDate</td>
+                <td>@Model.ReservationsVM.CheckOutDate</td>
+
+            </tr> 
+            }
+    </tbody>
+</table>
+

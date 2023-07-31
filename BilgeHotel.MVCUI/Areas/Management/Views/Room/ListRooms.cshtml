@@ -1,0 +1,53 @@
+﻿@model ListRoomVM
+@{
+    ViewBag.Title = "ListRooms";
+    Layout = "~/Areas/Management/Views/Shared/_LayoutArea.cshtml";
+}
+
+
+<table class="table table-borderless">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Kat Numarası</th>
+            <th scope="col">Oda Numarası</th>
+            <th scope="col">Kapasite</th>
+            <th scope="col">Gecelik Ücret</th>
+            <th scope="col">Oda Özellikleri</th>
+            <th scope="col">Oda Tipi</th>
+            <th scope="col">Odanın Durumu</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (AdminRoomVM room in Model.AdminRoomVMs)
+        {
+            <tr>
+                <td>@room.RoomID</td>
+                <td>@room.FloorNumber</td>
+                <td>@room.RoomNumber</td>
+                <td>@room.Capacity</td>
+                <td>@room.PricePerNight TL</td>
+
+                @foreach (BilgeHotel.MVCUI.Areas.Management.Data.ViewModels.PureVMs.RoomFeatureVM roomF in Model.RoomFeatureVMs)
+                {
+                    if (room.RoomFeatureID == roomF.FeatureID)
+                    {
+                        <td>@roomF.Description</td>
+                    }
+                }
+                <td>@room.RoomType</td>
+                <td>@room.RoomStatus</td>
+                <td>@Html.ActionLink("Güncelle", "UpdateRoom", new { id = room.RoomID }, new { @class = "btn btn-warning" })</td>
+                <td>@Html.ActionLink("Sil", "DeleteRoom", new { id = room.RoomID }, new { @class = "btn btn-danger" })</td>
+                <td>@Html.ActionLink("Rezervasyon", "ReserveRoom", new { id = room.RoomID }, new { @class = "btn btn-success" })</td>
+            </tr>
+
+        }
+
+    </tbody>
+</table>
+
+<script src="~/Areas/AdminScripts/AdminCategoryDTJ.js"></script>

@@ -1,0 +1,115 @@
+﻿@model BilgeHotel.MVCUI.Areas.Management.Data.ViewModels.ManagerVMs.RoomUpdatePageVM
+@{
+    ViewBag.Title = "UpdateRoom";
+    Layout = "~/Areas/Management/Views/Shared/_LayoutArea.cshtml";
+}
+
+<h2>UpdateRoom</h2>
+
+@using (Html.BeginForm("UpdateRoom", "Manager", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        <div class="col-sm-12">
+            @Html.HiddenFor(x => x.RoomVM.RoomID) 
+            <section class="panel">
+                <header class="panel-heading">
+                    Oda güncelleme sayfası
+                </header>
+
+                <div class="panel-body">
+
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Kat numarası</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.RoomVM.FloorNumber, new { @class = "form-control-genislik" })
+                        </div>
+                    </div>
+
+
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Oda numarası</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.RoomVM.RoomNumber, new { @class = "form-control-genislik" })
+                        </div>
+                    </div>
+                    <br /> <br />
+
+
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Kapasitesi</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.RoomVM.Capacity, new { @class = "form-control-genislik" })
+                        </div>
+                    </div>
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Gecelik ücreti</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.RoomVM.PricePerNight, new { @class = "form-control-genislik" })
+                        </div>
+                    </div>
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Oda tipi</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.RoomVM.RoomType, new { @class = "form-control-genislik" })
+                        </div>
+                    </div>
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Oda durumu</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.RoomVM.RoomStatus, new { @class = "form-control-genislik" })
+                        </div>
+                    </div>
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Açıklama</label>
+                        <div class="col-sm-10">
+                            @Html.DropDownListFor(x => x.RoomVM.RoomFeatureID, new SelectList(Model.FeatureVMs, "RoomFeatureID", "Description"), "lütfen seçiniz")
+                        </div>
+                    </div>
+                    <br /> <br />
+
+                   
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Resim seciniz</label>
+                        <div class="col-sm-10">
+
+                            <input type="file" name="httpImages" class="form-control genislik" />
+                            <br />
+                        </div>
+                    </div>
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">İşlem:</label>
+                        <div class="col-sm-10">
+                            <button class="btn btn-primary">Ekle</button>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+        </div>
+    </div>
+
+
+
+}
+
+

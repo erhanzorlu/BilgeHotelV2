@@ -1,0 +1,69 @@
+﻿@model ReservationsListPageVM
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Management/Views/Shared/_LayoutArea.cshtml";
+}
+
+<h1>RESEPSİYON EKRANI</h1>
+
+
+@if (Session["Error"] != null)
+{
+    <h4>@Session["Error"]</h4>
+}
+
+<header class="panel-heading">
+    @Html.ActionLink("Yeni Rezervasyon Oluştur", "FindRooms", "Receptionist", null, new { @class = "btn btn-primary" })
+</header>
+
+<div class="panel-body">
+    <h3>BU GÜN SONLANACAK OLAN REZERVASYONLAR</h3>
+
+    <div class="adv-table">
+        <table class="table table-borderless">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Giriş Tarihi</th>
+                    <th scope="col">Çıkış Tarihi</th>
+                    <th scope="col">Adı Soyadı</th>
+                    <th scope="col">Yetişkin Sayısı</th>
+                    <th scope="col">Çocuk Sayısı</th>
+                    <th scope="col">Tipi</th>
+                    <th scope="col">Paket</th>
+                    <th scope="col">Toplam Ücret</th>
+                    <th scope="col">Detay</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var reservation in Model.ReservationsVMs)
+                {
+                    <tr>
+                        <td>@reservation.ReservationID</td>
+                        <td>@reservation.CheckInDate</td>
+                        <td>@reservation.CheckOutDate</td>
+                        @foreach (var appUser in Model.UserVMs)
+                        {
+                            if (appUser.AppUserID == reservation.AppUserID)
+                            {
+                                <td>@appUser.FirstName @appUser.LastName</td>
+                            }
+                        }
+
+                        <td>@reservation.AdultCount</td>
+                        <td>@reservation.ChildrenCount</td>
+                        <td>@reservation.Type</td>
+                        <td>@reservation.Package</td>
+                        <td>@reservation.TotalPrice</td>
+                        <td>@Html.ActionLink("Detay Gör", "RoomAndGuests", "Sales", new { reservationID = reservation.ReservationID }, new { @class = "btn btn-warning" })</td>
+
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+

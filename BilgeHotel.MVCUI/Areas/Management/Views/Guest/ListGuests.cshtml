@@ -1,0 +1,40 @@
+﻿@model List<GuestVM>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Management/Views/Shared/_LayoutArea.cshtml";
+}
+
+@Html.ActionLink("Misafir Ekle", "Create", null, new { @class = "btn btn-success" })
+<table class="table table-borderless">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">TC.Kimlik Numarası</th>
+            <th scope="col">Ad</th>
+            <th scope="col">Soyad</th>
+            <th scope="col">Veri Durumu</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (GuestVM guest in Model)
+        {
+            <tr>
+                <td>@guest.ID</td>
+                <td>@guest.IdentificationNumber</td>
+                <td>@guest.FirstName</td>
+                <td>@guest.LastName</td>
+                <td>@guest.Status</td>
+                <td>@Html.ActionLink("Güncelle", "Update", new { id = guest.ID }, new { @class = "btn btn-warning" })</td>
+                <td>@Html.ActionLink("Sil", "Delete", new { id = guest.ID }, new { @class = "btn btn-danger" })</td>
+            </tr>
+
+        }
+
+    </tbody>
+</table>
+
+
+
+

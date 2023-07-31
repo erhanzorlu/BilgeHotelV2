@@ -1,0 +1,71 @@
+﻿@model ListAvailableRoomsVM
+@{
+    ViewBag.Title = "ListAvailableRooms";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h2>@TempData["ChoosenDates"] Tarihleri İçin Müsait Odaları Gör</h2>
+
+
+@foreach (var item in Model.RoomsVm)
+{
+    foreach (var rf in Model.RoomFeaturesVm)
+    {
+        if (rf.FeatureID == item.FeatureID)
+        {
+            <div class="row gx-4 gx-lg-5">
+                <div class="col-md-4 mb-5">
+                    <div class="card h-100">
+                        <div class="card-header" style="flex:content">
+                            @foreach (var roomAndImage in Model.RoomAndImagesVm)
+                            {
+                                foreach (var image in Model.ImagesVm)
+                                {
+                                    if (roomAndImage.RoomID == item.RoomID && roomAndImage.ImageID == image.ImageID)
+                                    {
+                                        <img src="@image.ImagePath" style="object-fit: fill;float:left;width: 50%;height: 50%">
+                                    }
+                                }
+
+                            }
+                        </div>
+                        <div class="card-body" style="display: table">
+
+                            @if (item.RoomID == 77)
+                            {
+                                <h2 class="card-title">@item.Capacity Kişilik Kral Dairesi</h2>
+                            }
+                            <p class="card-text">Oda Özellikleri: @rf.Description</p>
+                            @foreach (var roomAdnBed in Model.RoomAndBedVm)
+                            {
+                                if (item.RoomID == roomAdnBed.RoomID)
+                                {
+                                    foreach (var bed in Model.BedVm)
+                                    {
+                                        if (roomAdnBed.BedID == bed.BedID)
+                                        {
+                                            <p class="card-text">@roomAdnBed.Count Adet  @bed.BedType</p>
+                                        }
+
+                                    }
+                                }
+
+                            }
+
+                            <p class="card-text">@item.FloorNumber .Kat </p>
+                            <p class="card-text">Oda No: @item.RoomNumber</p>
+                            <p class="card-text">Gecelik Fiyat: @item.PricePerNight</p>
+                        </div>
+                        <div class="card-footer">
+                            <p class="card-text">Seçtiğiniz tarihler için toplam tutar: @item.SubTotal₺</p>
+                            @Html.ActionLink("Rezerve Et", "CreateReservation", new { id = item.RoomID}, new { @class = "btn btn-success" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    }
+}
+

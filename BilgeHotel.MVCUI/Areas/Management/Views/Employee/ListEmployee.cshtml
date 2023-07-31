@@ -1,0 +1,142 @@
+﻿@model EmployeeListPageVMs
+@{
+    ViewBag.Title = "ListEmployee";
+    Layout = "~/Areas/Management/Views/Shared/_LayoutArea.cshtml";
+}
+
+<header class="panel-heading">
+    @Html.ActionLink("Personel Ekle", "AddEmployee", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Ek Mesaileri Görüntüle", "ListExtraShifts", "ExtraShift", null, new { @class = "btn btn-primary" })
+
+</header>
+
+<div class="panel-body">
+    <div class="adv-table">
+        <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
+            <thead>
+                <tr>
+                    <th>Personel ID</th>
+                    <th>Adı</th>
+                    <th>Soyadı</th>
+                    <th>Adresi</th>
+                    <th>Email</th>
+                    <th>Şifre</th>
+                    <th>Telefon Numarası</th>
+                    <th>İzin Günü</th>
+                    <th>Toplam Maaş</th>
+                    <th>Saatlik Ücret</th>
+                    <th>Pozisyon</th>
+                    <th>Resim</th>
+                    <th>Mesai Bilgisi</th>
+                    <th>Oluşturma Tarihi</th>
+                    <th>Güncellenme Tarihi</th>
+                    <th>Silinme Tarihi</th>
+                    <th>Durumu</th>
+                    <th>Sil</th>
+                    <th>Güncelle</th>
+                    <th>Ek Mesai Ekle</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.EmployeeVMs)
+                {
+                    <tr class="gradeX">
+
+                        <td>@item.EmployeeID</td>
+                        <td>@item.FirstName</td>
+                        <td class="hidden-phone"> @item.LastName</td>
+                        <td class="center hidden-phone">@item.Address</td>
+                        <td class="center hidden-phone">@item.Email</td>
+                        <td class="center hidden-phone">@PasswordCryptographer.DeCrypt(item.Password)</td>
+                        <td class="center hidden-phone">@item.PhoneNumber</td>
+                        <td class="center hidden-phone">@item.OffDay</td>
+                        <td class="center hidden-phone">@item.Salary</td>
+                        <td class="center hidden-phone">@item.WagePerHour</td>
+
+                        @if (item.JobID == null)
+                        {
+                            <td class="center hidden-phone">Veri yok</td>
+                        }
+                        else
+                        {
+                            foreach (var job in Model.JobVMs)
+                            {
+                                if (job.JobID == item.JobID)
+                                {
+                                    <td class="center hidden-phone">@job.Name</td>
+                                }
+                            }
+                        }
+
+
+                        @if (item.ImageID == null)
+                        {
+                            <td class="center hidden-phone">Veri yok</td>
+                        }
+                        else
+                        {
+                            foreach (var image in Model.ImageVMs)
+                            {
+                                if (image.ImageID == item.ImageID)
+                                {
+                                    <td class="center hidden-phone"><img src="@image.ImagePath" width="200" height="200"></td>
+                                }
+
+                            }
+                        }
+
+
+                        @if (item.ShiftID == null)
+                        {
+                            <td class="center hidden-phone">Veri yok</td>
+                        }
+                        else
+                        {
+                            foreach (var shift in Model.ShiftVMs)
+                            {
+                                if (shift.ShiftID == item.ShiftID)
+                                {
+                                    <td class="center hidden-phone">@shift.ShiftInterval</td>
+                                }
+
+                            }
+                        }
+
+                        <td class="center hidden-phone">@item.CreatedDate</td>
+                        <td class="center hidden-phone">@item.ModifiedDate</td>
+
+                        @if (item.DeletedDate != null)
+                        {
+                            <td class="center hidden-phone">@item.DeletedDate</td>
+                        }
+                        else
+                        {
+                            <td class="center hidden-phone">Silinme tarihi bulunmuyor</td>
+                        }
+                        <td class="center hidden-phone">@item.Status</td>
+
+                        <td class="center hidden-phone"> @Html.ActionLink("Sil", "DeleteEmployee", new { id = item.EmployeeID }, new { @class = "btn btn-danger" })  </td>
+                        <td class="center hidden-phone">@Html.ActionLink("Güncelle", "UpdateEmployee", new { id = item.EmployeeID }, new { @class = "btn btn-warning" })</td>
+                        @if (item.Status != BilgeHotel.ENTITY.Enum.DataStatus.Deleted)
+                        {
+                            <th class="center hidden-phone">@Html.ActionLink("Ek Mesai Gir", "AddExtraShift", "ExtraShift", new { id = item.EmployeeID }, new { @class = "btn btn-primary" })</th>
+                        }
+                        else
+                        {
+
+                            <td class="center hidden-phone">Çalışan Silinmiş!</td>
+                        }
+
+
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<script src="~/Areas/AdminScripts/AdminCategoryDTJ.js"></script>

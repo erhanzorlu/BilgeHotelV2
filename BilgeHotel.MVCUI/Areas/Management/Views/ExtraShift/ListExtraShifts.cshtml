@@ -1,0 +1,102 @@
+﻿@model ExtraShiftListPageVM
+@{
+    ViewBag.Title = "ListExtraShifts";
+    Layout = "~/Areas/Management/Views/Shared/_LayoutArea.cshtml";
+}
+
+<header class="panel-heading">
+    Ekstra Mesaileri Gör
+    @Html.ActionLink("Ek Mesai Ekle", "ListEmployee", "Employee", null, new { @class = "btn btn-primary" })
+    <span style="background-color: forestgreen; color: aliceblue">@TempData["Success"]</span>
+</header>
+
+<div class="panel-body">
+    <div class="adv-table">
+        <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
+            <thead>
+                <tr>
+                    <th>Ekstra Mesai ID</th>
+                    <th>Çalışan Adı Soyadı</th>
+                    <th>Tarih</th>
+                    <th>Saatlik Ücret</th>
+                    <th>Kaç Saat</th>
+                    <th>Toplam Ek Mesai Tutarı</th>
+                    <th>Oluşturma Tarihi</th>
+                    <th>Güncellenme Tarihi</th>
+                    <th>Silinme Tarihi</th>
+                    <th>Durumu</th>
+                    <th>Sil</th>
+                    <th>Güncelle</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var shift in Model.ShiftVMs)
+                {
+
+                    <tr class="gradeX">
+
+                        <td>@shift.ExtraShiftID</td>
+
+
+                        @foreach (var emp in Model.EmployeeVMs)
+                        {
+
+                            if (shift.EmployeeID == emp.EmployeeID)
+                            {
+                                <td> @emp.FirstName @emp.LastName </td>
+                            }
+
+                        }
+
+                        <td>@shift.ExtraShiftDate</td>
+                        <td>@shift.ShiftWagePerHour</td>
+                        <td>@shift.HowManyHours</td>
+                        <td>@shift.TotalWage</td>
+
+                        @if (shift.CreatedDate != null)
+                        {
+                            <td>@shift.CreatedDate</td>
+                        }
+                        else
+                        {
+                            <td>Oluşturma tarihi bulunmuyor.</td>
+                        }
+
+                        @if (shift.ModifiedDate != null)
+                        {
+                            <td>@shift.ModifiedDate</td>
+                        }
+                        else
+                        {
+                            <td>Güncellenme tarihi bulunmuyor.</td>
+                        }
+
+                        @if (shift.DeletedDate != null)
+                        {
+                            <td>@shift.DeletedDate</td>
+                        }
+                        else
+                        {
+                            <td>Silinme tarihi bulunmuyor.</td>
+                        }
+
+                        <td>@shift.Status</td>
+
+                        <td>@Html.ActionLink("Sil", "DeleteExtraShift", new { id = shift.ExtraShiftID }, new { @class = "btn btn-danger" })  </td>
+                        <td>@Html.ActionLink("Güncelle", "UpdateExtraShift", new { id = shift.ExtraShiftID }, new { @class = "btn btn-warning" })</td>
+
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<script src="~/Areas/AdminScripts/AdminCategoryDTJ.js"></script>
+
+
+
+

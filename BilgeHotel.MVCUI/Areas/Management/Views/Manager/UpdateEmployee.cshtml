@@ -1,0 +1,144 @@
+﻿@model BilgeHotel.MVCUI.Areas.Management.Data.ViewModels.ManagerVMs.EmployeeAddUpdatePageVM
+@{
+    ViewBag.Title = "AddEmployee";
+    Layout = "~/Areas/Management/Views/Shared/_LayoutArea.cshtml";
+}
+
+@using (Html.BeginForm("UpdateEmployee", "Manager", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        <div class="col-sm-12">
+            @Html.HiddenFor(x => x.EmployeeVM.EmployeeID) @*Gizli sekilde id'yi tutup cekmek icin kullaniyorsun*@
+            <section class="panel">
+                <header class="panel-heading">
+                    Kategori Ekleme Sayfası
+                </header>
+
+                <div class="panel-body">
+
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Adı</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.EmployeeVM.FirstName, new { @class = "form-control-genislik" })
+                        </div>
+                    </div>
+
+
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Soyadı</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.EmployeeVM.LastName, new { @class = "form-control-genislik" })
+                        </div>
+                    </div>
+                    <br /> <br />
+
+
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Şifre</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.EmployeeVM.Password, new { @class = "form-control-genislik" })
+                        </div>
+                    </div>
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Telefon numarası</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.EmployeeVM.PhoneNumber, new { @class = "form-control-genislik" })
+                        </div>
+                    </div>
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">İzin günü</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.EmployeeVM.OffDay, new { @class = "form-control-genislik" })
+                        </div>
+                    </div>
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Maaşı(Yönetici değilse girilmesin)</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.EmployeeVM.Salary, new { @class = "form-control-genislik" })
+                        </div>
+                    </div>
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Saatlik ücret</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.EmployeeVM.WagePerHour, new { @class = "form-control-genislik" })
+                        </div>
+                    </div>
+                    <br /> <br />
+
+
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Adres</label>
+                        <div class="col-sm-10">
+                            @Html.TextAreaFor(x => x.EmployeeVM.Address, new { @class = "form-control-genislik" })
+                        </div>
+                    </div>
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Mesai Başlangıcı</label>
+                        <div class="col-sm-10">
+                            @Html.DropDownListFor(x => x.EmployeeVM.ShiftID, new SelectList(Model.ShiftVMs, "ShiftID", "StartingHour"), "lütfen seçiniz")
+                        </div>
+                    </div>
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Mesai Bitişi</label>
+                        <div class="col-sm-10">
+                            @Html.DropDownListFor(x => x.EmployeeVM.ShiftID, new SelectList(Model.ShiftVMs, "ShiftID", "EndingHour"), "lütfen seçiniz")
+                        </div>
+                    </div>
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Pozisyon</label>
+                        <div class="col-sm-10">
+                            @Html.DropDownListFor(x => x.EmployeeVM.JobID, new SelectList(Model.JobVMs, "JobID", "Name"), "lütfen seçiniz")
+                        </div>
+                    </div>
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Resim seciniz</label>
+                        <div class="col-sm-10">
+
+                            <input type="file" name="httpImages" class="form-control genislik" />
+                            <br />
+                        </div>
+                    </div>
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">İşlem:</label>
+                        <div class="col-sm-10">
+                            <button class="btn btn-primary">Ekle</button>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+        </div>
+    </div>
+
+
+
+}
+

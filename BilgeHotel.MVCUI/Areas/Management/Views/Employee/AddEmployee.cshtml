@@ -1,0 +1,132 @@
+﻿@model EmployeeAddUpdatePageVM
+@{
+    ViewBag.Title = "AddEmployee";
+    Layout = "~/Areas/Management/Views/Shared/_LayoutArea.cshtml";
+}
+
+@using (Html.BeginForm("AddEmployee", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        <div class="col-sm-12">
+
+            <section class="panel">
+                <header class="panel-heading">
+                    Çalışan Ekle
+                </header>
+
+                <div class="panel-body">
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Ad</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.EmployeeVM.FirstName, new { @class = "form-control-genislik" })
+                        </div>
+                        @Html.ValidationMessageFor(x => x.EmployeeVM.FirstName)
+                    </div>
+                    <br /> <br />
+                    <div class="form-group">
+                        <label class="col-sm-2">Soyad</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.EmployeeVM.LastName, new { @class = "form-control-genislik" })
+                        </div>
+                        @Html.ValidationMessageFor(x => x.EmployeeVM.LastName)
+                    </div>
+                    <br /> <br />
+                    <div class="form-group">
+                        <label class="col-sm-2">Şifre</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.EmployeeVM.Password, new { @class = "form-control-genislik" })
+                        </div>
+                        @Html.ValidationMessageFor(x => x.EmployeeVM.Password)
+                    </div>
+                    <br /> <br />
+                    <div class="form-group">
+                        <label class="col-sm-2">Telefon Numarası</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.EmployeeVM.PhoneNumber, new { @class = "form-control-genislik" })
+                        </div>
+                        @Html.ValidationMessageFor(x => x.EmployeeVM.PhoneNumber)
+                    </div>
+                    <br /> <br />
+                    <div class="form-group">
+                        <label class="col-sm-2">İzin Günü</label>
+                        <span>@ViewBag.OffDayError</span>
+                        <div class="col-sm-10">
+                            @Html.EnumDropDownListFor(x => x.EmployeeVM.OffDay, new { @class = "form-control-genislik" })
+                        </div>
+                    </div>
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Maaş(Yönetici Harici Giriş Yapmayınız!)</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.EmployeeVM.Salary, new { @class = "form-control-genislik" })
+                        </div>
+                        @Html.ValidationMessageFor(x => x.EmployeeVM.Salary)
+                    </div>
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Saatlik Ücret</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.EmployeeVM.WagePerHour, new { @class = "form-control-genislik" })
+                        </div>
+                        @Html.ValidationMessageFor(x => x.EmployeeVM.WagePerHour)
+                    </div>
+                    <br /> <br />
+                    <div class="form-group">
+                        <label class="col-sm-2">Adres</label>
+                        <div class="col-sm-10">
+                            @Html.TextAreaFor(x => x.EmployeeVM.Address, new { @class = "form-control-genislik" })
+                        </div>
+                        @Html.ValidationMessageFor(x => x.EmployeeVM.Address)
+                    </div>
+                    <br /> <br />
+                           <div class="form-group">
+                               <label class="col-sm-2">Mesai Bilgisi</label>
+                               <span>@ViewBag.ShiftError</span>
+                               <div class="col-sm-10">
+                                   @Html.DropDownListFor(x => x.EmployeeVM.ShiftID, new SelectList(Model.ShiftVMs, "ShiftID", "ShiftInterval"), "Lütfen Seçiniz")
+                               </div>
+                           </div>
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Pozisyon</label>
+                        <div class="col-sm-10">
+                            @Html.DropDownListFor(x => x.EmployeeVM.JobID, new SelectList(Model.JobVMs, "JobID", "Name"), "Lütfen Seçiniz")
+                        </div>
+                    </div>
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Görsel Seçiniz</label>
+                        <div class="col-sm-10">
+
+                            <input type="file" name="images" class="form-control genislik" />
+                            <br />
+                        </div>
+                    </div>
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">İşlem:</label>
+                        <div class="col-sm-10">
+                            <button class="btn btn-primary">Ekle</button>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+        </div>
+    </div>
+
+
+
+}
+

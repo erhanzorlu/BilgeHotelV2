@@ -1,0 +1,57 @@
+﻿@model ResetPwVM
+@{
+    ViewBag.Title = "ConfirmReset";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ConfirmReset</h2>
+
+<section class="vh-100" style="background-color: #9A616D;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+                <div class="card" style="border-radius: 1rem;">
+                    <div class="row g-0">
+                        <div class="col-md-6 col-lg-5 d-none d-md-block">
+                        </div>
+                        <span>@TempData["ErrorMessage"]</span>
+                        <span>@ViewBag.ErrorMessage</span>
+                        <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                            <div class="card-body p-4 p-lg-5 text-black">
+                                <span></span>
+                                @using (Html.BeginForm())
+                                {
+                                    @Html.HiddenFor(x => x.ID)
+                                    <div class="d-flex align-items-center mb-3 pb-1">
+                                        <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
+                                        <span class="h1 fw-bold mb-0">Welcome!</span>
+                                    </div>
+                                    <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Şifreni Yenile</h5>
+
+                                    <div class="form-outline mb-4">
+                                        <span asp-validation-for="Password"></span>
+                                        <label class="form-label" for="form2Example27">Şifre: </label>
+                                        @Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = "Şifrenizi Giriniz" })
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <span asp-validation-for="PasswordConfirmed"></span>
+                                        <label class="form-label" for="form2Example41">Şifre Tekrarı: </label>
+                                        @Html.PasswordFor(x => x.PasswordConfirmed, new { @class = "form-control", placeholder = "Şifrenizi Tekrar Giriniz" })
+                                    </div>
+
+                                    <div class="pt-1 mb-4">
+                                        <button class="btn btn-dark btn-lg btn-block">Şifreni Yenile</button>
+                                    </div>
+
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

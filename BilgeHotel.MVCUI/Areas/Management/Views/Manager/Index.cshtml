@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Management/Views/Shared/_LayoutArea.cshtml";
+}
+
+<h2>Index</h2>
+@if (Session["Error"]!=null)
+{
+    <h4>@Session["Error"]</h4>
+}
+
+@Html.ActionLink("Misafirleri Görüntüle", "ListGuests", "Guest")
+<br />
+@Html.ActionLink("Çalışan ve Mesai İşlemleri", "ListEmployee", "Employee")
+<br />
+@Html.ActionLink("Odaları Görüntüle", "ListRooms", "Room")
+<br />
+@Html.ActionLink("Rezervasyonlara Eriş", "ListReservations", "Sales")
+<br />
+@Html.ActionLink("Resepsiyon Ekranı", "Index", "Receptionist")

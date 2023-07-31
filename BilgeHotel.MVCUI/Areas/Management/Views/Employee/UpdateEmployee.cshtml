@@ -1,0 +1,135 @@
+﻿@model EmployeeAddUpdatePageVM
+@{
+    ViewBag.Title = "AddEmployee";
+    Layout = "~/Areas/Management/Views/Shared/_LayoutArea.cshtml";
+
+}
+
+@using (Html.BeginForm("UpdateEmployee", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        <div class="col-sm-12">
+            @Html.HiddenFor(x => x.EmployeeVM.EmployeeID)
+            @Html.HiddenFor(x=>x.EmployeeVM.Email)@*Gizli sekilde id'yi tutup cekmek icin kullaniyorsun*@
+            <section class="panel">
+
+                <header class="panel-heading">
+                    Çalışan Bilgisi Güncelle
+                </header>
+
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-sm-2">Adı</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.EmployeeVM.FirstName, new { @class = "form-control-genislik" })
+                        </div>
+                        @Html.ValidationMessageFor(x => x.EmployeeVM.FirstName)
+                    </div>
+                    <br /> <br />
+                    <div class="form-group">
+                        <label class="col-sm-2">Soyadı</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.EmployeeVM.LastName, new { @class = "form-control-genislik" })
+                        </div>
+                        @Html.ValidationMessageFor(x => x.EmployeeVM.LastName)
+                    </div>
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Şifre</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.EmployeeVM.Password, new { @class = "form-control-genislik" })
+                        </div>
+                        @Html.ValidationMessageFor(x => x.EmployeeVM.Password)
+                    </div>
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Telefon numarası</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.EmployeeVM.PhoneNumber, new { @class = "form-control-genislik" })
+                        </div>
+                        @Html.ValidationMessageFor(x => x.EmployeeVM.PhoneNumber)
+                    </div>
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">İzin günü</label>
+                        @*<span>@ViewBag.OffDayError</span>*@
+                        <span>@TempData["OffDayError"]</span>
+                        <div class="col-sm-10">
+                            @Html.EnumDropDownListFor(x => x.EmployeeVM.OffDay, new { @class = "form-control-genislik" })
+                        </div>
+                    </div>
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Maaşı(Yönetici değilse girilmesin)</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.EmployeeVM.Salary, new { @class = "form-control-genislik" })
+                        </div>
+                        @Html.ValidationMessageFor(x => x.EmployeeVM.Salary)
+                    </div>
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Saatlik ücret</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.EmployeeVM.WagePerHour, new { @class = "form-control-genislik" })
+                        </div>
+                        @Html.ValidationMessageFor(x => x.EmployeeVM.WagePerHour)
+                    </div>
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Adres</label>
+                        <div class="col-sm-10">
+                            @Html.TextAreaFor(x => x.EmployeeVM.Address, new { @class = "form-control-genislik" })
+                        </div>
+                        @Html.ValidationMessageFor(x => x.EmployeeVM.Address)
+                    </div>
+                    <br /> <br />
+                    <div class="form-group">
+                        <label class="col-sm-2">Mesai Tipi</label>
+                        <span>@TempData["ShiftError"]</span>
+                        <div class="col-sm-10">
+                            @Html.DropDownListFor(x => x.EmployeeVM.ShiftID, new SelectList(Model.ShiftVMs, "ShiftID", "ShiftInterval"), "Lütfen Seçiniz")
+                        </div>
+                    </div>
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Pozisyon</label>
+                        <div class="col-sm-10">
+                            @Html.DropDownListFor(x => x.EmployeeVM.JobID, new SelectList(Model.JobVMs, "JobID", "Name"), "Lütfen Seçiniz")
+                        </div>
+                    </div>
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Görsel Seçiniz</label>
+                        <div class="col-sm-10">
+
+                            <input type="file" name="httpImages" class="form-control genislik" />
+                            <br />
+                        </div>
+                    </div>
+                    <br /> <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2">İşlem:</label>
+                        <div class="col-sm-10">
+                            <button class="btn btn-primary">Güncelle</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+        </div>
+    </div>
+
+
+
+}
+

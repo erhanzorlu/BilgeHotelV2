@@ -1,0 +1,88 @@
+﻿@model List<BilgeHotel.MVCUI.ReservationClasses.CardItem>
+@{
+    ViewBag.Title = "CreateReservation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("CreateReservation", "Reservation", FormMethod.Post))
+{
+    if (ViewBag.SepetBos != null)
+    {
+        <h1 style="color:red">@ViewBag.SepetBos</h1>
+    }
+    else
+    {
+        <div class="card card-header">
+            <span>@ViewBag.RoomCountError</span>
+            <span>@ViewBag.RoomCantChoose</span>
+            @if (Model.Count == 3)
+            {
+
+                <span>Maksimum sayıda oda eklediniz, lüften paket seçimi yaparak rezervasyonunuzu onaylayınız.</span>
+            }
+            else
+            {
+                @Html.ActionLink("Oda Ekle", "FindRooms", "Reservation", null, new { @class = "btn btn-primary" })
+            }
+
+        </div>
+        <div class="container-fluid">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Giriş Tarihi</th>
+                        <th>Çıkış Tarihi</th>
+                        <th>Oda Numarası</th>
+                        <th>Kat</th>
+                        <th>Yetişkin Sayısı</th>
+                        <th>Çocuk Sayısı</th>
+                        <th>Kaç Gün</th>
+                        <th>Ara Toplam</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.CheckInDate</td>
+                            <td>@item.CheckOutDate</td>
+                            <td>@item.RoomNumber</td>
+                            <td>@item.FloorNumber</td>
+                            <td>@item.AdultCount</td>
+                            <td>@item.ChildrenCount</td>
+                            <td>@item.StayingDays gün</td>
+                            <td>@item.SubTotal₺</td>
+                            <td>@item.TotalPrice₺</td>
+                        </tr>
+                    }
+                    <tr>
+                        @foreach (var item in Model)
+                        {
+                            <td>Genel Toplam: @item.TotalPrice₺</td>
+                        }
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+            <div class="form-group">
+                <label for="cocuk">Lütfen Rezervasyon Paketinizi Seçiniz: </label>
+                <select class="form-control" id="package" name="package">
+                    <option value="1">Her şey dahil</option>
+                    <option value="2">Tam Pansiyon</option>
+                </select>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+            <button class="btn btn-primary btn-lg"></button>
+        </div>
+        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+            @Html.ActionLink("Oda Ekle", "DoneWithReservation", "Reservation", null, new { @class = "btn btn-primary" })
+        </div>
+    }
+}
+
+

@@ -1,0 +1,122 @@
+﻿@model AppUserVM
+@{
+            ViewBag.Title = "FindRooms";
+            Layout = "~/Areas/Management/Views/Shared/_LayoutArea.cshtml";
+            BilgeHotel.MVCUI.ReservationClasses.CardItem cardItem = Session["CardItem"] as BilgeHotel.MVCUI.ReservationClasses.CardItem;
+        }
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Otel Rezervasyonu</title>
+    <!-- Bootstrap CSS dosyası ekleme -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Müsait Oda Ara</h1>
+        <span>@ViewBag.DateTimeError</span>
+        <span>@ViewBag.PersonCountError</span>
+
+        @using (Html.BeginForm("FindRooms", "Receptionist", FormMethod.Post, new { @class = "form-signin" }))
+        {
+
+
+
+
+
+
+
+            <span>@TempData["ChoosenDates"]</span>
+
+            <div class="form-group">
+                <label for="giris">Giriş Tarihi:</label>
+                <input type="date" class="form-control" id="giris" name="checkIn" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cikis">Çıkış Tarihi:</label>
+                <input type="date" class="form-control" id="cikis" name="checkOut" required>
+            </div>
+
+            <div class="form-group">
+                <label for="yetiskin">Yetişkin Sayısı:</label>
+                <select class="form-control" id="yetiskin" name="adult">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="cocuk">Çocuk Sayısı:</label>
+                <select class="form-control" id="cocuk" name="child">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+
+            @*<div class="form-group">
+                <label for="rezervasyon-tipi">Rezervasyon Tipi:</label>
+                <select class="form-control" id="rezervasyon-tipi" name="rezervasyon-tipi">
+                    <option value="standart">Standart</option>
+                    <option value="deluxe">Deluxe</option>
+                    <option value="suit">Suit</option>
+                </select>
+            </div>*@
+
+            if (Session["CardItem"] == null)
+            {
+                <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <p>Lütfen Rezervasyon Paketinizi Seçiniz:</p>
+                    <br />
+                    <input type="radio" id="package" name="package" value="1">
+                    <label for="package">Her Şey Dahil</label><br>
+                    <input type="radio" id="package" name="package" value="2">
+                    <label for="package">Full Pansiyon</label>
+                </div>
+
+
+                <div class="form-outline mb-4">
+                    <span asp-validation-for="FirstName"></span>
+                    <label class="form-label" for="form2Example84">Ad: </label>
+                    @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", placeholder = "Adınızı Giriniz" })
+                </div>
+                <div class="form-outline mb-4">
+                    <span asp-validation-for="LastName"></span>
+                    <label class="form-label" for="form2Example61">Soyad: </label>
+                    @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", placeholder = "Soyadınızı Giriniz" })
+                </div>
+                <div class="form-outline mb-4">
+                    <span asp-validation-for="IdentificationNumber"></span>
+                    <label class="form-label" for="form2Example62">TC.Kimlik Numarası: </label>
+                    @Html.TextBoxFor(x => x.IdentificationNumber, new { @class = "form-control", placeholder = "Kimlik Numaranızı Giriniz" })
+                </div>
+                <div class="form-outline mb-4">
+                    <span asp-validation-for="IdentificationNumber"></span>
+                    <label class="form-label" for="form2Example62">TC.Kimlik Numarası: </label>
+                    @Html.TextBoxFor(x => x.PhoneNumber, new { @class = "form-control", placeholder = "Telefon numarası giriniz" })
+                </div>
+            }
+            else
+            {
+                <h3> Paketiniz: @cardItem.Package</h3>
+
+            }
+
+
+
+
+            <button type="submit" class="btn btn-primary">Oda Bul</button>
+
+        }
+    </div>
+
+    <!-- Bootstrap JS dosyasını ekleme (isteğe bağlı) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+
